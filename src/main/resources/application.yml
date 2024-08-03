@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: transaction-authorizer
+
+  autoconfigure:
+    exclude:
+      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+
+  data:
+    dynamodb:
+      endpoint: http://localhost:4566
+      region: us-east-1
+      access-key: fakeMyKeyId
+      secret-key: fakeSecretAccessKey
