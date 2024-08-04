@@ -36,4 +36,16 @@ class AccountRepositoryService(
         return accountEntity.toDomain()
     }
 
+    override fun findByDocumentNumber(documentNumber: String): Account {
+        logger.info("Starting process to find accountId with documentNumber: [{}], in DB.", documentNumber)
+        val accountEntity = accountRepository.findByDocumentNumber(documentNumber)
+            .orElseThrow { NotFoundException(Errors.RESOURCE_NOT_FOUND) }
+        logger.info(
+            "Done process to find accountId: [{}], with documentNumber: [{}], in DB.",
+            accountEntity.accountId,
+            documentNumber
+        )
+        return accountEntity.toDomain()
+    }
+
 }
