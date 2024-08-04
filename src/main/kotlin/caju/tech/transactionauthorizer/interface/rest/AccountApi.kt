@@ -3,14 +3,13 @@ package caju.tech.transactionauthorizer.`interface`.rest
 
 import caju.tech.transactionauthorizer.adapter.ports.input.request.CreateAccountRequest
 import caju.tech.transactionauthorizer.adapter.ports.input.request.UpdateBalanceAccountRequest
-import caju.tech.transactionauthorizer.adapter.ports.input.response.CreateAccountResponse
+import caju.tech.transactionauthorizer.adapter.ports.input.response.AccountIdResponse
 import caju.tech.transactionauthorizer.adapter.ports.input.response.UpdateBalanceAccountResponse
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotBlank
 import org.springframework.http.HttpStatus.OK
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
-import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
 
@@ -22,7 +21,7 @@ interface AccountApi {
         consumes = [APPLICATION_JSON_VALUE],
         produces = [APPLICATION_JSON_VALUE]
     )
-    fun create(@Validated @RequestBody createAccountRequest: CreateAccountRequest): ResponseEntity<CreateAccountResponse>
+    fun create(@Valid @RequestBody createAccountRequest: CreateAccountRequest): ResponseEntity<AccountIdResponse>
 
     @ResponseStatus(OK)
     @PatchMapping(
@@ -31,8 +30,19 @@ interface AccountApi {
         produces = [APPLICATION_JSON_VALUE]
 
     )
+
     fun updateBalance(
-        @PathVariable(required = true) @NotBlank accountId: String,
-        @RequestBody updateBalanceAccountRequest: UpdateBalanceAccountRequest,
+        @PathVariable(required = true) @Valid @NotBlank accountId: String,
+        @Valid @RequestBody updateBalanceAccountRequest: UpdateBalanceAccountRequest,
     ): ResponseEntity<UpdateBalanceAccountResponse>
+
+    @ResponseStatus(OK)
+    @GetMapping(
+        "/{documentNumber}",
+        produces = [APPLICATION_JSON_VALUE]
+    )
+    @Valid
+    fun findAccountIdByDocumentNumber(
+        @PathVariable(required = true) @NotBlank documentNumber: String,
+    ): ResponseEntity<AccountIdResponse>
 }

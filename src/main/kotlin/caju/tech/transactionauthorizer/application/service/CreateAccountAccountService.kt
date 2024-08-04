@@ -1,18 +1,18 @@
 package caju.tech.transactionauthorizer.application.service
 
-import caju.tech.transactionauthorizer.application.ports.input.CreateUseCasePort
+import caju.tech.transactionauthorizer.application.ports.input.CreateAccountUseCasePort
 import caju.tech.transactionauthorizer.application.ports.output.AccountRepositoryPort
 import caju.tech.transactionauthorizer.domain.Account
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
 @Service
-class CreateService(
+class CreateAccountAccountService(
     private val accountRepositoryPort: AccountRepositoryPort
-) : CreateUseCasePort {
+) : CreateAccountUseCasePort {
 
     companion object {
-        private val logger = LoggerFactory.getLogger(CreateService::class.java.name)
+        private val logger = LoggerFactory.getLogger(CreateAccountAccountService::class.java.name)
     }
 
     override fun execute(account: Account): Account {

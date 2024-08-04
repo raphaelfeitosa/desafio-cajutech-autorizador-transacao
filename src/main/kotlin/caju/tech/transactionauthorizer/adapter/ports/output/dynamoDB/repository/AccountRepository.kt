@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository
 import java.util.Optional
 
 @EnableScan
-interface AccountRepository : CrudRepository<AccountEntity, String>{
+interface AccountRepository : CrudRepository<AccountEntity, String> {
 
     fun findByAccountId(accountId: String): Optional<AccountEntity>
     fun findByDocumentNumber(documentNumber: String): Optional<AccountEntity>

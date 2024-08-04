@@ -1,8 +1,10 @@
 package caju.tech.transactionauthorizer.application.ports.output
 
 import caju.tech.transactionauthorizer.domain.Account
+import java.util.*
 
 interface AccountRepositoryPort {
     fun save(account: Account)
     fun findByAccountId(accountId: String): Account
+    fun findByDocumentNumber(documentNumber: String): Account
 }
