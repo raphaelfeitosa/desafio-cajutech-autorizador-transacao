@@ -14,8 +14,8 @@ data class Account(
     val updateAt: LocalDateTime = LocalDateTime.now(),
 ) {
     fun updateBalance(balanceAccount: BalanceAccount) {
-        this.food += balanceAccount.food
-        this.meal += balanceAccount.meal
-        this.cash += balanceAccount.cash
+        balanceAccount.food?.let { this.food += it }
+        balanceAccount.meal?.let { this.meal += it }
+        balanceAccount.cash?.let { this.cash += it }
     }
 }

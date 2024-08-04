@@ -1,7 +1,18 @@
 package caju.tech.transactionauthorizer.adapter.ports.input.request
 
+import jakarta.validation.constraints.DecimalMin
+import jakarta.validation.constraints.Digits
+
 data class UpdateBalanceAccountRequest(
-    val food: Double = 0.0,
-    val meal: Double = 0.0,
-    val cash: Double = 0.0,
+    @field:DecimalMin(value = "0.01")
+    @field:Digits(integer = 4, fraction = 2)
+    val food: Double?,
+
+    @field:DecimalMin(value = "0.01")
+    @field: Digits(integer = 4, fraction = 2)
+    val meal: Double?,
+
+    @field: DecimalMin(value = "0.01")
+    @field: Digits(integer = 4, fraction = 2)
+    val cash: Double?,
 )

@@ -12,7 +12,6 @@ import caju.tech.transactionauthorizer.application.ports.input.UpdateBalanceAcco
 import caju.tech.transactionauthorizer.`interface`.rest.AccountApi
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -26,7 +25,6 @@ class AccountController(
         private val logger = LoggerFactory.getLogger(AccountController::class.java.name)
     }
 
-    @PostMapping
     override fun create(createAccountRequest: CreateAccountRequest): ResponseEntity<AccountIdResponse> {
         logger.info("Request received to create a new account: [{}].", createAccountRequest)
         val createAccountResponse = createAccountUseCasePort.execute(createAccountRequest.toDomain())

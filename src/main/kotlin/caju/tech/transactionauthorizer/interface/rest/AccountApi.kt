@@ -43,6 +43,6 @@ interface AccountApi {
     )
     @Valid
     fun findAccountIdByDocumentNumber(
-        @PathVariable(required = true) @NotBlank documentNumber: String,
+        @PathVariable(required = true) @Valid @NotBlank documentNumber: String,
     ): ResponseEntity<AccountIdResponse>
 }
