@@ -12,24 +12,28 @@ import java.time.LocalDateTime
 data class AccountEntity(
     @Id
     @DynamoDBHashKey(attributeName = "account_id")
-    val accountId: String,
+    var accountId: String? = null,
 
     @DynamoDBAttribute(attributeName = "name")
-    val name: String,
+    var name: String? = null,
 
     @DynamoDBAttribute(attributeName = "document")
-    val documentNumber: String,
+    var documentNumber: String? = null,
 
     @DynamoDBAttribute(attributeName = "food")
-    var food: Double,
+    var food: Double? = null,
 
     @DynamoDBAttribute(attributeName = "meal")
-    var meal: Double,
+    var meal: Double? = null,
 
     @DynamoDBAttribute(attributeName = "cash")
-    var cash: Double,
+    var cash: Double? = null,
 
     @DynamoDBAttribute(attributeName = "create_at")
     @DynamoDBTypeConverted(converter = LocalDateTimeConverter::class)
-    val createAt: LocalDateTime,
+    var createAt: LocalDateTime? = null,
+
+    @DynamoDBAttribute(attributeName = "update_at")
+    @DynamoDBTypeConverted(converter = LocalDateTimeConverter::class)
+    var updateAt: LocalDateTime = LocalDateTime.now()
 )
