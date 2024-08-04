@@ -7,8 +7,6 @@ import jakarta.validation.Constraint
 import jakarta.validation.ConstraintValidator
 import jakarta.validation.ConstraintValidatorContext
 import jakarta.validation.Payload
-import jakarta.validation.Valid
-import jakarta.validation.constraints.NotBlank
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ResponseStatus
 import kotlin.reflect.KClass
@@ -29,12 +27,11 @@ class ExistsDocumentNumberValidator(
 ) : ConstraintValidator<ExistsDocumentNumber, String> {
 
     override fun isValid(documentNumber: String?, context: ConstraintValidatorContext?): Boolean {
-        when {
-            documentNumber != null ->
-                if (accountRepository.findByDocumentNumber(documentNumber).isPresent)
-                    throw BusinessException(DOCUMENT_NUMBER_ALREADY_EXISTS)
+
+        if (!documentNumber.isNullOrBlank()) {
+            val account = accountRepository.findByDocumentNumber(documentNumber)
+            if (account.isPresent) throw BusinessException(DOCUMENT_NUMBER_ALREADY_EXISTS)
         }
         return true
     }
-
 }

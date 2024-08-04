@@ -9,21 +9,31 @@ import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
 import org.springframework.web.context.request.WebRequest
+import org.springframework.web.method.annotation.HandlerMethodValidationException
 
 @RestControllerAdvice
 class ExceptionHandler(
     private val messageSource: MessageSource,
 ) {
 
-    @ExceptionHandler(MethodArgumentNotValidException::class)
+    @ExceptionHandler(
+        MethodArgumentNotValidException::class,
+        HandlerMethodValidationException::class
+    )
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleMethodArgumentNotValidException(
-        exception: MethodArgumentNotValidException,
+        exception: Exception,
         request: WebRequest,
     ): ErrorMessageResponse {
         val errorMessage = hashMapOf<String, String?>()
-        exception.bindingResult.fieldErrors.forEach {
-            errorMessage[it.field] = messageSource.getMessage(it, LocaleContextHolder.getLocale())
+
+        val fieldErrors = when (exception) {
+            is MethodArgumentNotValidException -> exception.allErrors
+            is HandlerMethodValidationException -> exception.allErrors
+            else -> emptyList()
+        }
+        fieldErrors.forEach {
+            errorMessage[it.defaultMessage.toString()] = messageSource.getMessage(it, LocaleContextHolder.getLocale())
         }
         return ErrorMessageResponse(
             code = HttpStatus.BAD_REQUEST.name,
