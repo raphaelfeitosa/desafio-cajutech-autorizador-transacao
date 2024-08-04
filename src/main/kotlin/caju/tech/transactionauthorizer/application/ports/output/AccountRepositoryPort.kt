@@ -4,5 +4,5 @@ import caju.tech.transactionauthorizer.domain.Account
 
 interface AccountRepositoryPort {
     fun save(account: Account)
-    fun findById(accountId: String): Account
+    fun findByAccountId(accountId: String): Account
 }

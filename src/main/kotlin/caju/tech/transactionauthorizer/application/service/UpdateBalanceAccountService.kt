@@ -17,7 +17,7 @@ class UpdateBalanceAccountService(
 
     override fun execute(balanceAccount: BalanceAccount) {
         logger.info("Starting service to update balance for accountId: [{}]", balanceAccount.accountId)
-        val account = accountRepositoryPort.findById(balanceAccount.accountId)
+        val account = accountRepositoryPort.findByAccountId(balanceAccount.accountId)
         account.updateBalance(balanceAccount)
         accountRepositoryPort.save(account)
         logger.info("Done service to update balance for accountId: [{}]", balanceAccount.accountId)
