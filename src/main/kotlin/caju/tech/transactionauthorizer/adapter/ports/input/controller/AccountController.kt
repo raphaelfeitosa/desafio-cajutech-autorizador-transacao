@@ -26,11 +26,11 @@ class AccountController(
     }
 
     @PostMapping
-    override fun create(@RequestBody createAccountRequest: CreateAccountRequest): CreateAccountResponse {
+    override fun create(createAccountRequest: CreateAccountRequest): ResponseEntity<CreateAccountResponse> {
         logger.info("Request received to create a new account: [{}].", createAccountRequest)
         val createAccountResponse = createUseCasePort.execute(createAccountRequest.toDomain())
         logger.info("Account created with success!")
-        return createAccountResponse.toResponse()
+        return ResponseEntity.ok().body(createAccountResponse.toResponse())
     }
 
     override fun updateBalance(
@@ -41,7 +41,6 @@ class AccountController(
         updateBalanceAccountUseCasePort.execute(updateBalanceAccountRequest.toDomain(accountId))
         logger.info("Balance updated for accountId: [{}] with success!", accountId)
         return ResponseEntity.ok().body(UpdateBalanceAccountResponse("Balance update with success!"))
-
     }
 
 }

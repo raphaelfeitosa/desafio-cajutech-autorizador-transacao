@@ -10,6 +10,7 @@ import jakarta.validation.constraints.NotBlank
 import org.springframework.http.HttpStatus.OK
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity
+import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
 
@@ -21,7 +22,7 @@ interface AccountApi {
         consumes = [APPLICATION_JSON_VALUE],
         produces = [APPLICATION_JSON_VALUE]
     )
-    fun create(@Valid @RequestBody createAccountRequest: CreateAccountRequest): CreateAccountResponse
+    fun create(@Validated @RequestBody createAccountRequest: CreateAccountRequest): ResponseEntity<CreateAccountResponse>
 
     @ResponseStatus(OK)
     @PatchMapping(
@@ -32,6 +33,6 @@ interface AccountApi {
     )
     fun updateBalance(
         @PathVariable(required = true) @NotBlank accountId: String,
-        @RequestBody updateBalanceAccountRequest: UpdateBalanceAccountRequest
+        @RequestBody updateBalanceAccountRequest: UpdateBalanceAccountRequest,
     ): ResponseEntity<UpdateBalanceAccountResponse>
 }

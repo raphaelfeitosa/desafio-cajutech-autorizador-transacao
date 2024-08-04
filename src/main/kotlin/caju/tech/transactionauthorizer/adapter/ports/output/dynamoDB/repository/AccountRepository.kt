@@ -9,4 +9,5 @@ import java.util.Optional
 interface AccountRepository : CrudRepository<AccountEntity, String>{
 
     fun findByAccountId(accountId: String): Optional<AccountEntity>
+    fun findByDocumentNumber(documentNumber: String): Optional<AccountEntity>
 }
