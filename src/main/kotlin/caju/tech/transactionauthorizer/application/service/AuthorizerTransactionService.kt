@@ -3,6 +3,7 @@ package caju.tech.transactionauthorizer.application.service
 import caju.tech.transactionauthorizer.application.ports.input.AuthorizerTransactionUseCasePort
 import caju.tech.transactionauthorizer.application.ports.output.AccountRepositoryPort
 import caju.tech.transactionauthorizer.application.ports.output.TransactionRepositoryPort
+import caju.tech.transactionauthorizer.domain.Account
 import caju.tech.transactionauthorizer.domain.Transaction
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
@@ -27,17 +28,19 @@ class AuthorizerTransactionService(
                 account.getCategoryBalance(transaction.mcc).let { category ->
                     account.hasBalance(category, transaction).let { hasBalance ->
                         when (hasBalance) {
-                            true -> {
-                                account.debitBalance(category, transaction)
-                                accountRepositoryPort.save(account)
-                                transactionRepositoryPort.save(transaction)
-                                logger.info("APPROVED transaction. return: [{}]", APPROVED)
-                                APPROVED
-                            }
-
+                            true -> debitAccountAndSaveTransaction(account, category, transaction)
                             false -> {
-                                logger.info("REJECTED transaction, insufficient balance. return: [{}]", REJECTED)
-                                REJECTED
+                                logger.info(
+                                    "Insufficient balance to accountId: [{}] with category: [{}]. Checking balance in category: CASH",
+                                    account.accountId,
+                                    category
+                                )
+                                if (account.hasBalance(category = "CASH", transaction)) {
+                                    debitAccountAndSaveTransaction(account, "CASH", transaction)
+                                } else {
+                                    logger.info("REJECTED transaction, insufficient balance in category [CASH]. return: [{}]", REJECTED)
+                                    REJECTED
+                                }
                             }
                         }
                     }
@@ -47,5 +50,22 @@ class AuthorizerTransactionService(
             logger.error("ERROR process transaction: [{}], message: [{}]", transaction, ex.message)
             ERROR
         }
+
+    private fun debitAccountAndSaveTransaction(
+        account: Account,
+        category: String,
+        transaction: Transaction,
+    ): String {
+        account.debitBalance(category, transaction)
+        accountRepositoryPort.save(account)
+        transactionRepositoryPort.save(transaction)
+        logger.info(
+            "APPROVED transaction. accountId: [{}], category: [{}], return: [{}]",
+            account.accountId,
+            category,
+            APPROVED
+        )
+        return APPROVED
+    }
 
 }

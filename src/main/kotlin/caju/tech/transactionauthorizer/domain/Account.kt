@@ -34,6 +34,8 @@ data class Account(
             else -> this.cash >= transaction.amount
         }
 
+    fun hasBalanceCash(transaction: Transaction): Boolean = this.cash >= transaction.amount
+
     fun getCategoryBalance(mcc: String): String =
         when (mcc) {
             "5411", "5412" -> "FOOD"
