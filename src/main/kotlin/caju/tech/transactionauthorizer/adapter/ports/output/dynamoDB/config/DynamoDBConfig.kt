@@ -23,6 +23,13 @@ class DynamoDBConfig {
 
     @Bean
     fun createTables(dynamoDB: AmazonDynamoDB) = CommandLineRunner {
+        val requestTransactions = CreateTableRequest()
+            .withTableName("transactions")
+            .withKeySchema(KeySchemaElement("transaction_id", KeyType.HASH))
+            .withAttributeDefinitions(
+                AttributeDefinition("transaction_id", ScalarAttributeType.S)
+            )
+            .withProvisionedThroughput(ProvisionedThroughput(5L, 5L))
 
         val requestAccounts = CreateTableRequest()
             .withTableName("accounts")
@@ -34,6 +41,9 @@ class DynamoDBConfig {
 
         val tables = dynamoDB.listTables().tableNames
 
+        if (!tables.contains("transactions")) {
+            dynamoDB.createTable(requestTransactions)
+        }
         if (!tables.contains("accounts")) {
             dynamoDB.createTable(requestAccounts)
         }

@@ -18,4 +18,13 @@ data class Account(
         balanceAccount.meal?.let { this.meal += it }
         balanceAccount.cash?.let { this.cash += it }
     }
+
+    fun debitBalance(category: String, transaction: Transaction) {
+        when (category) {
+            "FOOD" -> this.food -= transaction.amount
+            "MEAL" -> this.meal -= transaction.amount
+            else -> this.cash -= transaction.amount
+        }
+    }
+
 }
