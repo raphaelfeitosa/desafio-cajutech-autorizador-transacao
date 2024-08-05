@@ -18,4 +18,29 @@ data class Account(
         balanceAccount.meal?.let { this.meal += it }
         balanceAccount.cash?.let { this.cash += it }
     }
+
+    fun debitBalance(category: String, transaction: Transaction) {
+        when (category) {
+            "FOOD" -> this.food -= transaction.amount
+            "MEAL" -> this.meal -= transaction.amount
+            else -> this.cash -= transaction.amount
+        }
+    }
+
+    fun hasBalance(category: String, transaction: Transaction): Boolean =
+        when (category) {
+            "FOOD" -> this.food >= transaction.amount
+            "MEAL" -> this.meal >= transaction.amount
+            else -> this.cash >= transaction.amount
+        }
+
+    fun hasBalanceCash(transaction: Transaction): Boolean = this.cash >= transaction.amount
+
+    fun getCategoryBalance(mcc: String): String =
+        when (mcc) {
+            "5411", "5412" -> "FOOD"
+            "5811", "5812" -> "MEAL"
+            else -> "CASH"
+        }
+
 }
