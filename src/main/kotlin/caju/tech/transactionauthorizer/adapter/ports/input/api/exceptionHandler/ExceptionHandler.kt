@@ -1,6 +1,8 @@
-package caju.tech.transactionauthorizer.adapter.ports.input.exceptions
+package caju.tech.transactionauthorizer.adapter.ports.input.api.exceptionHandler
 
-import caju.tech.transactionauthorizer.adapter.ports.input.exceptions.errors.Errors
+import caju.tech.transactionauthorizer.domain.erros.Errors
+import caju.tech.transactionauthorizer.domain.exceptions.BusinessException
+import caju.tech.transactionauthorizer.domain.exceptions.NotFoundException
 import org.springframework.context.MessageSource
 import org.springframework.context.i18n.LocaleContextHolder
 import org.springframework.http.HttpStatus

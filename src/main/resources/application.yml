@@ -12,3 +12,12 @@ spring:
       region: us-east-1
       access-key: fakeMyKeyId
       secret-key: fakeSecretAccessKey
+
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 1500
+
+lock:
+  timeout:
+    milliseconds: 15000

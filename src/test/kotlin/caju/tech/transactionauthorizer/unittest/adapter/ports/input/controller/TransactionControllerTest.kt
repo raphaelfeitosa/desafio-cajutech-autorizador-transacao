@@ -1,7 +1,7 @@
 package caju.tech.transactionauthorizer.unittest.adapter.ports.input.controller
 
-import caju.tech.transactionauthorizer.adapter.ports.input.controller.TransactionController
-import caju.tech.transactionauthorizer.adapter.ports.input.request.AuthorizerTransactionRequest
+import caju.tech.transactionauthorizer.adapter.ports.input.api.controller.TransactionController
+import caju.tech.transactionauthorizer.adapter.ports.input.api.request.AuthorizerTransactionRequest
 import caju.tech.transactionauthorizer.application.ports.input.AuthorizerTransactionUseCasePort
 import caju.tech.transactionauthorizer.helper.dummyObject
 import org.junit.jupiter.api.BeforeEach

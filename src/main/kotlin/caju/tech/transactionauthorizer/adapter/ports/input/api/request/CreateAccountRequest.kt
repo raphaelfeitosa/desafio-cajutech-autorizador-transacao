@@ -1,8 +1,7 @@
-package caju.tech.transactionauthorizer.adapter.ports.input.request
+package caju.tech.transactionauthorizer.adapter.ports.input.api.request
 
-import caju.tech.transactionauthorizer.adapter.ports.input.request.validation.ExistsDocumentNumber
+import caju.tech.transactionauthorizer.adapter.ports.input.api.request.validation.ExistsDocumentNumber
 import jakarta.validation.constraints.NotBlank
-import jakarta.validation.constraints.Pattern
 import jakarta.validation.constraints.Size
 import org.hibernate.validator.constraints.br.CPF
 

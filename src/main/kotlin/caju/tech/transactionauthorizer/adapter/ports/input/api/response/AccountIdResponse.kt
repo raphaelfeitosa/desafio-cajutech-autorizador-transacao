@@ -1,4 +1,4 @@
-package caju.tech.transactionauthorizer.adapter.ports.input.response
+package caju.tech.transactionauthorizer.adapter.ports.input.api.response
 
 import java.util.UUID
 

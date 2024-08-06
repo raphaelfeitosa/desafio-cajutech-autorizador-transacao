@@ -1,7 +1,7 @@
-package caju.tech.transactionauthorizer.adapter.ports.input.request.validation
+package caju.tech.transactionauthorizer.adapter.ports.input.api.request.validation
 
-import caju.tech.transactionauthorizer.adapter.ports.input.exceptions.BusinessException
-import caju.tech.transactionauthorizer.adapter.ports.input.exceptions.errors.Errors.DOCUMENT_NUMBER_ALREADY_EXISTS
+import caju.tech.transactionauthorizer.domain.exceptions.BusinessException
+import caju.tech.transactionauthorizer.domain.erros.Errors.DOCUMENT_NUMBER_ALREADY_EXISTS
 import caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.repository.AccountRepository
 import jakarta.validation.Constraint
 import jakarta.validation.ConstraintValidator

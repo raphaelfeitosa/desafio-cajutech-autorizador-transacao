@@ -1,15 +1,15 @@
 package caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.service
 
-import caju.tech.transactionauthorizer.adapter.ports.input.exceptions.NotFoundException
-import caju.tech.transactionauthorizer.adapter.ports.input.exceptions.errors.Errors
+import caju.tech.transactionauthorizer.domain.exceptions.NotFoundException
+import caju.tech.transactionauthorizer.domain.erros.Errors
 import caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.converter.toDomain
 import caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.converter.toEntity
 import caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.repository.AccountRepository
 import caju.tech.transactionauthorizer.application.ports.output.AccountRepositoryPort
 import caju.tech.transactionauthorizer.domain.Account
-import jakarta.transaction.Transactional
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class AccountRepositoryService(

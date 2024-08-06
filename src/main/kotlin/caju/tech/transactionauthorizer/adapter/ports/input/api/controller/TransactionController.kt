@@ -1,11 +1,11 @@
-package caju.tech.transactionauthorizer.adapter.ports.input.controller
+package caju.tech.transactionauthorizer.adapter.ports.input.api.controller
 
-import caju.tech.transactionauthorizer.adapter.ports.input.converter.toDomain
-import caju.tech.transactionauthorizer.adapter.ports.input.converter.toResponse
-import caju.tech.transactionauthorizer.adapter.ports.input.request.AuthorizerTransactionRequest
-import caju.tech.transactionauthorizer.adapter.ports.input.response.TransactionResponse
+import caju.tech.transactionauthorizer.adapter.ports.input.api.converter.toDomain
+import caju.tech.transactionauthorizer.adapter.ports.input.api.converter.toResponse
+import caju.tech.transactionauthorizer.adapter.ports.input.api.request.AuthorizerTransactionRequest
+import caju.tech.transactionauthorizer.adapter.ports.input.api.response.TransactionResponse
 import caju.tech.transactionauthorizer.application.ports.input.AuthorizerTransactionUseCasePort
-import caju.tech.transactionauthorizer.`interface`.rest.TransactionApi
+import caju.tech.transactionauthorizer.adapter.ports.input.api.TransactionApi
 import jakarta.validation.Valid
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity

@@ -1,8 +1,8 @@
-package caju.tech.transactionauthorizer.adapter.ports.input.converter
+package caju.tech.transactionauthorizer.adapter.ports.input.api.converter
 
-import caju.tech.transactionauthorizer.adapter.ports.input.request.AuthorizerTransactionRequest
-import caju.tech.transactionauthorizer.adapter.ports.input.request.CreateAccountRequest
-import caju.tech.transactionauthorizer.adapter.ports.input.request.UpdateBalanceAccountRequest
+import caju.tech.transactionauthorizer.adapter.ports.input.api.request.AuthorizerTransactionRequest
+import caju.tech.transactionauthorizer.adapter.ports.input.api.request.CreateAccountRequest
+import caju.tech.transactionauthorizer.adapter.ports.input.api.request.UpdateBalanceAccountRequest
 import caju.tech.transactionauthorizer.domain.Account
 import caju.tech.transactionauthorizer.domain.BalanceAccount
 import caju.tech.transactionauthorizer.domain.Transaction

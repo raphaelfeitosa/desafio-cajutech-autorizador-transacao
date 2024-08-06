@@ -1,10 +1,10 @@
 package caju.tech.transactionauthorizer.unittest.adapter.ports.input.request.validation
 
-import caju.tech.transactionauthorizer.adapter.ports.input.exceptions.BusinessException
-import caju.tech.transactionauthorizer.adapter.ports.input.exceptions.errors.Errors.DOCUMENT_NUMBER_ALREADY_EXISTS
-import caju.tech.transactionauthorizer.adapter.ports.input.request.validation.ExistsDocumentNumberValidator
+import caju.tech.transactionauthorizer.adapter.ports.input.api.request.validation.ExistsDocumentNumberValidator
 import caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.entity.AccountEntity
 import caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.repository.AccountRepository
+import caju.tech.transactionauthorizer.domain.erros.Errors.DOCUMENT_NUMBER_ALREADY_EXISTS
+import caju.tech.transactionauthorizer.domain.exceptions.BusinessException
 import caju.tech.transactionauthorizer.helper.dummyObject
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach

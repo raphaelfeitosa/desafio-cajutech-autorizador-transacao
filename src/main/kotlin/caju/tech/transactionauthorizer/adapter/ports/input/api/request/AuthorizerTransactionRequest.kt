@@ -1,4 +1,4 @@
-package caju.tech.transactionauthorizer.adapter.ports.input.request
+package caju.tech.transactionauthorizer.adapter.ports.input.api.request
 
 import jakarta.validation.constraints.DecimalMin
 import jakarta.validation.constraints.Digits
@@ -15,7 +15,7 @@ data class AuthorizerTransactionRequest(
     val amount: Double,
 
     @field:NotBlank(message = "merchant cannot be blank")
-    @field:Pattern(regexp = "^[0-9]{4}\$", message = "O mcc deve ter 4 digitos")
+    @field:Pattern(regexp = "^[0-9]{4}\$", message = "mcc must have 4 digits")
     val merchant: String,
 
     @field:NotBlank(message = "mcc cannot be blank")

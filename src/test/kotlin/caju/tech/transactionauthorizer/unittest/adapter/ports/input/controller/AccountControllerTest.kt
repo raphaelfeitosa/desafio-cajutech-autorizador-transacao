@@ -1,8 +1,9 @@
 package caju.tech.transactionauthorizer.unittest.adapter.ports.input.controller
 
-import caju.tech.transactionauthorizer.adapter.ports.input.controller.AccountController
-import caju.tech.transactionauthorizer.adapter.ports.input.request.CreateAccountRequest
-import caju.tech.transactionauthorizer.adapter.ports.input.request.UpdateBalanceAccountRequest
+
+import caju.tech.transactionauthorizer.adapter.ports.input.api.controller.AccountController
+import caju.tech.transactionauthorizer.adapter.ports.input.api.request.CreateAccountRequest
+import caju.tech.transactionauthorizer.adapter.ports.input.api.request.UpdateBalanceAccountRequest
 import caju.tech.transactionauthorizer.application.ports.input.CreateAccountUseCasePort
 import caju.tech.transactionauthorizer.application.ports.input.FindAccountByDocumentNumberUseCasePort
 import caju.tech.transactionauthorizer.application.ports.input.UpdateBalanceAccountUseCasePort
@@ -10,7 +11,6 @@ import caju.tech.transactionauthorizer.domain.Account
 import caju.tech.transactionauthorizer.helper.dummyObject
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.*
 import java.util.*
 import kotlin.test.assertEquals
@@ -25,6 +25,7 @@ class AccountControllerTest {
     private val findAccountByDocumentNumberUseCasePort: FindAccountByDocumentNumberUseCasePort = mock()
 
     private lateinit var account: Account
+    private lateinit var createAccountRequest: CreateAccountRequest
     private val accountId: UUID = UUID.randomUUID()
 
     @BeforeEach

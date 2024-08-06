@@ -1,10 +1,10 @@
 package caju.tech.transactionauthorizer.unittest.adapter.ports.output.dynamoDB.service
 
-import caju.tech.transactionauthorizer.adapter.ports.input.exceptions.NotFoundException
 import caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.converter.toEntity
 import caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.repository.AccountRepository
 import caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.service.AccountRepositoryService
 import caju.tech.transactionauthorizer.domain.Account
+import caju.tech.transactionauthorizer.domain.exceptions.NotFoundException
 import caju.tech.transactionauthorizer.helper.dummyObject
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
