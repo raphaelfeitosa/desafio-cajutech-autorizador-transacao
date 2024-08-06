@@ -2,9 +2,11 @@ package caju.tech.transactionauthorizer.application.service
 
 import caju.tech.transactionauthorizer.application.ports.input.AuthorizerTransactionUseCasePort
 import caju.tech.transactionauthorizer.application.ports.output.AccountRepositoryPort
+import caju.tech.transactionauthorizer.application.ports.output.LockPort
 import caju.tech.transactionauthorizer.application.ports.output.TransactionRepositoryPort
 import caju.tech.transactionauthorizer.domain.Account
 import caju.tech.transactionauthorizer.domain.Transaction
+import caju.tech.transactionauthorizer.domain.withLock
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service
 class AuthorizerTransactionService(
     private val transactionRepositoryPort: TransactionRepositoryPort,
     private val accountRepositoryPort: AccountRepositoryPort,
+    private val lockPort: LockPort,
 ) : AuthorizerTransactionUseCasePort {
 
     companion object {
@@ -22,33 +25,38 @@ class AuthorizerTransactionService(
     }
 
     override fun execute(transaction: Transaction): String =
-        try {
-            logger.info("Starting service to authorize a new transaction: [{}]", transaction)
-            accountRepositoryPort.findByAccountId(transaction.accountId).let { account ->
-                account.getCategoryBalance(transaction.mcc).let { category ->
-                    account.hasBalance(category, transaction).let { hasBalance ->
-                        when (hasBalance) {
-                            true -> debitAccountAndSaveTransaction(account, category, transaction)
-                            false -> {
-                                logger.info(
-                                    "Insufficient balance to accountId: [{}] with category: [{}]. Checking balance in category: CASH",
-                                    account.accountId,
-                                    category
-                                )
-                                if (account.hasBalance(category = "CASH", transaction)) {
-                                    debitAccountAndSaveTransaction(account, "CASH", transaction)
-                                } else {
-                                    logger.info("REJECTED transaction, insufficient balance in category [CASH]. return: [{}]", REJECTED)
-                                    REJECTED
+        withLock("${transaction.accountId}-${AuthorizerTransactionService::class.java.name}", lockPort) {
+            try {
+                logger.info("Starting service to authorize a new transaction: [{}]", transaction)
+                accountRepositoryPort.findByAccountId(transaction.accountId).let { account ->
+                    account.getCategoryBalance(transaction.mcc).let { category ->
+                        account.hasBalance(category, transaction).let { hasBalance ->
+                            when (hasBalance) {
+                                true -> debitAccountAndSaveTransaction(account, category, transaction)
+                                false -> {
+                                    logger.info(
+                                        "Insufficient balance to accountId: [{}] with category: [{}]. Checking balance in category: CASH",
+                                        account.accountId,
+                                        category
+                                    )
+                                    if (account.hasBalance(category = "CASH", transaction)) {
+                                        debitAccountAndSaveTransaction(account, "CASH", transaction)
+                                    } else {
+                                        logger.info(
+                                            "REJECTED transaction, insufficient balance in category [CASH]. return: [{}]",
+                                            REJECTED
+                                        )
+                                        REJECTED
+                                    }
                                 }
                             }
                         }
                     }
                 }
+            } catch (ex: Exception) {
+                logger.error("ERROR process transaction: [{}], message: [{}]", transaction, ex.message)
+                ERROR
             }
-        } catch (ex: Exception) {
-            logger.error("ERROR process transaction: [{}], message: [{}]", transaction, ex.message)
-            ERROR
         }
 
     private fun debitAccountAndSaveTransaction(

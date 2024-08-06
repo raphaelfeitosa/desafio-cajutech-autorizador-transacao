@@ -14,3 +14,11 @@ services:
       - DEBUG=1
     volumes:
       - "./localstack:/var/lib/localstack"
+
+  redis:
+    container_name: redis_latest
+    image: redis
+    command: redis-server
+    ports:
+      - "6379:6379"
+    restart: always

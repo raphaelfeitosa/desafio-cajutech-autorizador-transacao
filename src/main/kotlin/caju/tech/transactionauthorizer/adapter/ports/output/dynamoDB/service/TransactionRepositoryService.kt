@@ -4,9 +4,9 @@ import caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.converter.t
 import caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.repository.TransactionRepository
 import caju.tech.transactionauthorizer.application.ports.output.TransactionRepositoryPort
 import caju.tech.transactionauthorizer.domain.Transaction
-import jakarta.transaction.Transactional
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class TransactionRepositoryService(

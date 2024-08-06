@@ -1,4 +1,4 @@
-package caju.tech.transactionauthorizer.adapter.ports.input.request
+package caju.tech.transactionauthorizer.adapter.ports.input.api.request
 
 import jakarta.validation.constraints.DecimalMin
 import jakarta.validation.constraints.Digits
