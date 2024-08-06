@@ -10,9 +10,7 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.mockito.kotlin.any
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.whenever
+import org.mockito.kotlin.*
 import java.util.*
 import kotlin.test.assertEquals
 
@@ -34,23 +32,26 @@ class ExistsDocumentNumberValidatorTest {
 
     @Test
     fun `should throw BusinessException if document number already exists`() {
-        whenever(accountRepository.findByDocumentNumber(documentNumber)).thenReturn(Optional.of(accountEntity))
+        whenever(accountRepository.findByDocumentNumber(any())).thenReturn(Optional.of(accountEntity))
         val exception = assertThrows<BusinessException> {
-            existsDocumentNumberValidator.isValid(documentNumber, any())
+            existsDocumentNumberValidator.isValid(documentNumber, mock())
         }
 
         assertEquals(DOCUMENT_NUMBER_ALREADY_EXISTS, exception.message)
+        verify(accountRepository, times(1)).findByDocumentNumber(any())
     }
 
     @Test
     fun `should return true if document number is null or blank`() {
-        assertTrue(existsDocumentNumberValidator.isValid(null, any()))
-        assertTrue(existsDocumentNumberValidator.isValid("", any()))
+        assertTrue(existsDocumentNumberValidator.isValid(null, mock()))
+        assertTrue(existsDocumentNumberValidator.isValid("", mock()))
+        verify(accountRepository, times(0)).findByDocumentNumber(any())
     }
 
     @Test
     fun `should return true if document number does not exist`() {
-        whenever(accountRepository.findByDocumentNumber(documentNumber)).thenReturn(Optional.empty())
-        assertTrue(existsDocumentNumberValidator.isValid(documentNumber, any()))
+        whenever(accountRepository.findByDocumentNumber(any())).thenReturn(Optional.empty())
+        assertTrue(existsDocumentNumberValidator.isValid("", mock()))
+        verify(accountRepository, times(0)).findByDocumentNumber(any())
     }
 }
