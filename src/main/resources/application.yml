@@ -21,3 +21,13 @@ spring:
 lock:
   timeout:
     milliseconds: 15000
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+  info:
+    title: Transaction Authorizer API
+    description: API for authorizing transactions
+    version: v1.0.0

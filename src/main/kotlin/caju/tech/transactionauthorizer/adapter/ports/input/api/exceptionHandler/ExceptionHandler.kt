@@ -30,7 +30,7 @@ class ExceptionHandler(
         val errorMessage = hashMapOf<String, String?>()
 
         val fieldErrors = when (exception) {
-            is MethodArgumentNotValidException -> exception.allErrors
+            is MethodArgumentNotValidException -> exception.fieldErrors
             is HandlerMethodValidationException -> exception.allErrors
             else -> emptyList()
         }
