@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Digits
 
 data class UpdateBalanceAccountRequest(
     @field:DecimalMin(value = "0.01", message = "must be greater than or equal to 0.01")
-    @field: Digits(
+    @field:Digits(
         integer = 6,
         fraction = 2,
         message = "numeric value outside the limit. integer: 6 digits. fraction: 2 digits"
@@ -13,7 +13,7 @@ data class UpdateBalanceAccountRequest(
     val food: Double?,
 
     @field:DecimalMin(value = "0.01", message = "must be greater than or equal to 0.01")
-    @field: Digits(
+    @field:Digits(
         integer = 6,
         fraction = 2,
         message = "numeric value outside the limit. integer: 6 digits. fraction: 2 digits"

@@ -7,6 +7,7 @@ import caju.tech.transactionauthorizer.adapter.ports.input.response.AccountIdRes
 import caju.tech.transactionauthorizer.adapter.ports.input.response.UpdateBalanceAccountResponse
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotBlank
+
 import org.springframework.http.HttpStatus.OK
 import org.springframework.http.MediaType.APPLICATION_JSON_VALUE
 import org.springframework.http.ResponseEntity

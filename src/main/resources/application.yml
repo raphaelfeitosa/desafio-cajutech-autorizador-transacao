@@ -14,7 +14,7 @@ spring:
       secret-key: fakeSecretAccessKey
 
   redis:
-    host: ${REDIS_HOST:localhost}
+    host: localhost
     port: 6379
     timeout: 1500
 
