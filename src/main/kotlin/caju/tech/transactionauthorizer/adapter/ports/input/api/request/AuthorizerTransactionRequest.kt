@@ -11,11 +11,11 @@ data class AuthorizerTransactionRequest(
     val accountId: String,
 
     @field:DecimalMin(value = "0.01", message = "must be greater than or equal to 0.01")
-    @field: Digits(integer = 6, fraction = 2, message = "numeric value outside the limit. integer: 6 digits. fraction: 2 digits")
+    @field:Digits(integer = 6, fraction = 2, message = "numeric value outside the limit. integer: 6 digits. fraction: 2 digits")
     val amount: Double,
 
-    @field:NotBlank(message = "merchant cannot be blank")
-    @field:Pattern(regexp = "^[0-9]{4}\$", message = "mcc must have 4 digits")
+    @NotBlank(message = "merchant cannot be blank")
+    @Pattern(regexp = "^\\d{4}$", message = "mcc must contain 4 numbers")
     val merchant: String,
 
     @field:NotBlank(message = "mcc cannot be blank")

@@ -21,7 +21,7 @@ data class UpdateBalanceAccountRequest(
     val meal: Double?,
 
     @field:DecimalMin(value = "0.01", message = "must be greater than or equal to 0.01")
-    @field: Digits(
+    @field:Digits(
         integer = 6,
         fraction = 2,
         message = "numeric value outside the limit. integer: 6 digits. fraction: 2 digits"
