@@ -1,10 +1,10 @@
-package caju.tech.transactionauthorizer.`interface`.rest
+package caju.tech.transactionauthorizer.adapter.ports.input.api
 
 
-import caju.tech.transactionauthorizer.adapter.ports.input.request.CreateAccountRequest
-import caju.tech.transactionauthorizer.adapter.ports.input.request.UpdateBalanceAccountRequest
-import caju.tech.transactionauthorizer.adapter.ports.input.response.AccountIdResponse
-import caju.tech.transactionauthorizer.adapter.ports.input.response.UpdateBalanceAccountResponse
+import caju.tech.transactionauthorizer.adapter.ports.input.api.request.CreateAccountRequest
+import caju.tech.transactionauthorizer.adapter.ports.input.api.request.UpdateBalanceAccountRequest
+import caju.tech.transactionauthorizer.adapter.ports.input.api.response.AccountIdResponse
+import caju.tech.transactionauthorizer.adapter.ports.input.api.response.UpdateBalanceAccountResponse
 import jakarta.validation.Valid
 import jakarta.validation.constraints.NotBlank
 

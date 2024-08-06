@@ -1,7 +1,7 @@
 package caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.service
 
-import caju.tech.transactionauthorizer.adapter.ports.input.exceptions.NotFoundException
-import caju.tech.transactionauthorizer.adapter.ports.input.exceptions.errors.Errors
+import caju.tech.transactionauthorizer.domain.exceptions.NotFoundException
+import caju.tech.transactionauthorizer.domain.erros.Errors
 import caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.converter.toDomain
 import caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.converter.toEntity
 import caju.tech.transactionauthorizer.adapter.ports.output.dynamoDB.repository.AccountRepository

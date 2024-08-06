@@ -1,4 +1,4 @@
-package caju.tech.transactionauthorizer.adapter.ports.input.exceptions
+package caju.tech.transactionauthorizer.adapter.ports.input.api.exceptionHandler
 
 import com.fasterxml.jackson.annotation.JsonFormat
 import com.fasterxml.jackson.annotation.JsonInclude

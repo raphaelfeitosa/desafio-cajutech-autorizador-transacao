@@ -1,8 +1,8 @@
-package caju.tech.transactionauthorizer.`interface`.rest
+package caju.tech.transactionauthorizer.adapter.ports.input.api
 
 
-import caju.tech.transactionauthorizer.adapter.ports.input.request.AuthorizerTransactionRequest
-import caju.tech.transactionauthorizer.adapter.ports.input.response.TransactionResponse
+import caju.tech.transactionauthorizer.adapter.ports.input.api.request.AuthorizerTransactionRequest
+import caju.tech.transactionauthorizer.adapter.ports.input.api.response.TransactionResponse
 import jakarta.validation.Valid
 
 import org.springframework.http.HttpStatus.OK

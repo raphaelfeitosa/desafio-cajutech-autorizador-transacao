@@ -1,7 +1,7 @@
 package caju.tech.transactionauthorizer.adapter.ports.output.redis.service
 
-import caju.tech.transactionauthorizer.adapter.ports.input.exceptions.BusinessException
-import caju.tech.transactionauthorizer.adapter.ports.input.exceptions.errors.Errors
+import caju.tech.transactionauthorizer.domain.exceptions.BusinessException
+import caju.tech.transactionauthorizer.domain.erros.Errors
 import caju.tech.transactionauthorizer.adapter.ports.output.redis.repository.LockRepository
 import caju.tech.transactionauthorizer.application.ports.output.LockPort
 import org.slf4j.LoggerFactory
