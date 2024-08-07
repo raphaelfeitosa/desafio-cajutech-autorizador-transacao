@@ -14,7 +14,7 @@ data class AuthorizerTransactionRequest(
     @field:Digits(integer = 6, fraction = 2, message = "numeric value outside the limit. integer: 6 digits. fraction: 2 digits")
     val amount: Double,
 
-    @NotBlank(message = "merchant cannot be blank")
+    @field:NotBlank(message = "merchant cannot be blank")
     @Pattern(regexp = "^\\d{4}$", message = "mcc must contain 4 numbers")
     val merchant: String,
 

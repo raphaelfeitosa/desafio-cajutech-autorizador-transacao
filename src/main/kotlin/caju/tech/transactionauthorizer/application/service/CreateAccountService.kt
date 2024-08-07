@@ -7,12 +7,12 @@ import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 
 @Service
-class CreateAccountAccountService(
+class CreateAccountService(
     private val accountRepositoryPort: AccountRepositoryPort
 ) : CreateAccountUseCasePort {
 
     companion object {
-        private val logger = LoggerFactory.getLogger(CreateAccountAccountService::class.java.name)
+        private val logger = LoggerFactory.getLogger(CreateAccountService::class.java.name)
     }
 
     override fun execute(account: Account): Account {

@@ -17,6 +17,9 @@ data class TransactionEntity(
     @DynamoDBAttribute(attributeName = "account_id")
     val accountId: String,
 
+    @DynamoDBAttribute(attributeName = "merchant_id")
+    val merchantId: String,
+
     @DynamoDBAttribute(attributeName = "amount")
     val amount: Double,
 

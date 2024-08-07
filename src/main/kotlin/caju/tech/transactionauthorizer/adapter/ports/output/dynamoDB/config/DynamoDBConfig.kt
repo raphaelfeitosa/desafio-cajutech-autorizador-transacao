@@ -37,6 +37,14 @@ class DynamoDBConfig {
             )
             .withProvisionedThroughput(ProvisionedThroughput(5L, 5L))
 
+        val requestMerchants = CreateTableRequest()
+            .withTableName("merchants")
+            .withKeySchema(KeySchemaElement("merchant_id", KeyType.HASH))
+            .withAttributeDefinitions(
+                AttributeDefinition("merchant_id", ScalarAttributeType.S),
+            )
+            .withProvisionedThroughput(ProvisionedThroughput(5L, 5L))
+
         val tables = dynamoDB.listTables().tableNames
 
         if (!tables.contains("transactions")) {
@@ -44,6 +52,9 @@ class DynamoDBConfig {
         }
         if (!tables.contains("accounts")) {
             dynamoDB.createTable(requestAccounts)
+        }
+        if (!tables.contains("merchants")) {
+            dynamoDB.createTable(requestMerchants)
         }
     }
 }

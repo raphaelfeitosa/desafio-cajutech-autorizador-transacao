@@ -25,7 +25,6 @@ class AccountControllerTest {
     private val findAccountByDocumentNumberUseCasePort: FindAccountByDocumentNumberUseCasePort = mock()
 
     private lateinit var account: Account
-    private lateinit var createAccountRequest: CreateAccountRequest
     private val accountId: UUID = UUID.randomUUID()
 
     @BeforeEach
@@ -46,10 +45,10 @@ class AccountControllerTest {
 
         whenever(createAccountUseCasePort.execute(any())).thenReturn(account)
 
-        val clientResponse = accountController.create(createAccountRequest)
+        val accountResponse = accountController.create(createAccountRequest)
 
-        assertNotNull(clientResponse)
-        assertEquals(account.accountId, clientResponse.body!!.accountId)
+        assertNotNull(accountResponse)
+        assertEquals(account.accountId, accountResponse.body!!.accountId)
         verify(createAccountUseCasePort, times(1)).execute(any())
     }
 
