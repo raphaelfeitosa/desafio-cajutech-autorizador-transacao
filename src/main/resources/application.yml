@@ -20,7 +20,7 @@ spring:
 
 lock:
   timeout:
-    milliseconds: 15000
+    milliseconds: 5000
 
 springdoc:
   api-docs:

@@ -45,7 +45,8 @@ data class Account(
         when (category) {
             "FOOD" -> this.foodAmount >= transaction.amount
             "MEAL" -> this.mealAmount >= transaction.amount
-            else -> this.cashAmount >= transaction.amount
+            "CASH" -> this.cashAmount >= transaction.amount
+            else -> false
         }
 
     fun hasBalanceCash(transaction: Transaction): Boolean = this.cashAmount >= transaction.amount

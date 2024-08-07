@@ -33,6 +33,14 @@ class MerchantRepositoryServiceTest {
     }
 
     @Test
+    fun update() {
+        whenever(merchantRepository.findByName(any())).thenReturn(Optional.of(merchant.copy(name = "Merchant", categories = listOf("FOOD")).toEntity()))
+
+        merchantRepositoryService.save(merchant.copy(name = "Merchant", categories = listOf("FOOD", "MEAL")))
+        verify(merchantRepository, times(1)).save(any())
+    }
+
+    @Test
     fun findByName() {
         whenever(merchantRepository.findByName(any())).thenReturn(Optional.of(merchant.toEntity()))
         merchantRepositoryService.findByName(merchant.name)

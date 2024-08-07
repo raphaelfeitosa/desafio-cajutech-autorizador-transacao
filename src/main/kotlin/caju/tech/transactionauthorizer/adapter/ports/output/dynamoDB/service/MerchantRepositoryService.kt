@@ -22,10 +22,19 @@ class MerchantRepositoryService(
 
     @Transactional
     override fun save(merchant: Merchant) {
-        logger.info("Starting process to save merchant: [{}], in DB.", merchant)
-        val merchantEntity = merchant.toEntity()
-        merchantRepository.save(merchantEntity)
-        logger.info("Done process to save merchant: [{}], in DB", merchant)
+        logger.info("Starting process to save or update merchant: [{}], in DB.", merchant)
+        val merchantEntity = merchantRepository.findByName(merchant.name)
+
+        if (merchantEntity.isPresent) {
+            merchantEntity.get().name = merchant.name
+            merchantEntity.get().categories = merchant.categories
+            merchantEntity.get()
+            merchantRepository.save(merchantEntity.get())
+            logger.info("Done process to updated merchant: [{}], in DB", merchant)
+        } else {
+            logger.info("Done process to save merchant: [{}], in DB", merchant)
+            merchantRepository.save(merchant.toEntity())
+        }
     }
 
     override fun findByName(name: String): Merchant {
