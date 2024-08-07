@@ -30,5 +30,5 @@ fun UpdateBalanceAccountRequest.toDomain(accountId: String) = BalanceAccount(
 
 fun CreateMerchantRequest.toDomain() = Merchant(
     name = this.name,
-    categories = this.categories.let { categories -> categories!!.map { it }.toSet() }
+    categories = this.categories.let { categories -> categories!!.map { it } }
 )

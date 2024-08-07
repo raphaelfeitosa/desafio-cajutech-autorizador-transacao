@@ -18,7 +18,7 @@ data class MerchantEntity(
     var name: String? = null,
 
     @DynamoDBAttribute(attributeName = "document")
-    var categories: Set<String>? = null,
+    var categories: List<String>? = null,
 
     @DynamoDBAttribute(attributeName = "create_at")
     @DynamoDBTypeConverted(converter = LocalDateTimeConverter::class)

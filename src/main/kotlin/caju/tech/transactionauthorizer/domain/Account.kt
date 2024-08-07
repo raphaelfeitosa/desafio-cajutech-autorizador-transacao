@@ -50,11 +50,10 @@ data class Account(
 
     fun hasBalanceCash(transaction: Transaction): Boolean = this.cashAmount >= transaction.amount
 
-    fun getCategoryBalance(mcc: String): String =
-        when (mcc) {
+    fun getCategory(transaction: Transaction): String =
+        when (transaction.mcc) {
             "5411", "5412" -> "FOOD"
             "5811", "5812" -> "MEAL"
-            else -> "CASH"
+            else -> "INVALID_CATEGORY"
         }
-
 }

@@ -6,7 +6,7 @@ import java.util.*
 data class Merchant(
     val merchantId: UUID = UUID.randomUUID(),
     val name: String,
-    val categories: Set<String>? = null,
+    val categories: List<String>? = null,
     val createdAt: LocalDateTime = LocalDateTime.now(),
     val updateAt: LocalDateTime = LocalDateTime.now(),
 )

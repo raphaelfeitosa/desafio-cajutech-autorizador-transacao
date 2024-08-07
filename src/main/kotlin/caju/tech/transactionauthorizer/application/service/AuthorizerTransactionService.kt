@@ -3,6 +3,7 @@ package caju.tech.transactionauthorizer.application.service
 import caju.tech.transactionauthorizer.application.ports.input.AuthorizerTransactionUseCasePort
 import caju.tech.transactionauthorizer.application.ports.output.AccountRepositoryPort
 import caju.tech.transactionauthorizer.application.ports.output.LockPort
+import caju.tech.transactionauthorizer.application.ports.output.MerchantRepositoryPort
 import caju.tech.transactionauthorizer.application.ports.output.TransactionRepositoryPort
 import caju.tech.transactionauthorizer.domain.Account
 import caju.tech.transactionauthorizer.domain.Transaction
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service
 class AuthorizerTransactionService(
     private val transactionRepositoryPort: TransactionRepositoryPort,
     private val accountRepositoryPort: AccountRepositoryPort,
+    private val merchantRepositoryPort: MerchantRepositoryPort,
     private val lockPort: LockPort,
 ) : AuthorizerTransactionUseCasePort {
 
@@ -28,31 +30,35 @@ class AuthorizerTransactionService(
         withLock("${transaction.accountId}-${AuthorizerTransactionService::class.java.name}", lockPort) {
             try {
                 logger.info("Starting service to authorize a new transaction: [{}]", transaction)
-                accountRepositoryPort.findByAccountId(transaction.accountId).let { account ->
-                    account.getCategoryBalance(transaction.mcc).let { category ->
-                        account.hasBalance(category, transaction).let { hasBalance ->
-                            when (hasBalance) {
-                                true -> debitAccountAndSaveTransaction(account, category, transaction)
-                                false -> {
-                                    logger.info(
-                                        "Insufficient balance to accountId: [{}] with category: [{}]. Checking balance in category: CASH",
-                                        account.accountId,
-                                        category
-                                    )
-                                    if (account.hasBalance(category = "CASH", transaction)) {
-                                        debitAccountAndSaveTransaction(account, "CASH", transaction)
-                                    } else {
-                                        logger.info(
-                                            "REJECTED transaction, insufficient balance in category [CASH]. return: [{}]",
-                                            REJECTED
-                                        )
-                                        REJECTED
-                                    }
-                                }
-                            }
-                        }
+
+                val account = accountRepositoryPort.findByAccountId(transaction.accountId)
+                val categoryAccount = account.getCategory(transaction)
+
+                if (account.hasBalance(categoryAccount, transaction))
+                    return debitAccountAndSaveTransaction(account, categoryAccount, transaction)
+
+                logger.info(
+                    "Insufficient balance to accountId: [{}] with category: [{}]. Checking category in merchant",
+                    account.accountId,
+                    categoryAccount
+                )
+
+                val categoriesMerchant = merchantRepositoryPort.findByName(transaction.merchant).categories
+
+                if (!categoriesMerchant.isNullOrEmpty()) {
+                    categoriesMerchant.forEach { categoryMerchant ->
+                        if (account.hasBalance(categoryMerchant, transaction))
+                            return debitAccountAndSaveTransaction(account, categoryMerchant, transaction)
                     }
                 }
+                if (account.hasBalanceCash(transaction)) {
+                    return debitAccountAndSaveTransaction(account, "CASH", transaction)
+                }
+                logger.info(
+                    "REJECTED transaction, insufficient balance in category [CASH]. return: [{}]",
+                    REJECTED
+                )
+                return REJECTED
             } catch (ex: Exception) {
                 logger.error("ERROR process transaction: [{}], message: [{}]", transaction, ex.message)
                 ERROR
