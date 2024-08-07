@@ -13,14 +13,19 @@ import kotlin.reflect.KClass
 @Target(AnnotationTarget.FIELD, AnnotationTarget.VALUE_PARAMETER)
 @Retention(AnnotationRetention.RUNTIME)
 annotation class ValidCategory(
-    val message: String = "Invalid category. Categories must be of type FOOD, MEAL or CASH.",
+    val message: String = "Invalid category. Categories must be of type FOOD and MEAL.",
     val groups: Array<KClass<Any>> = [],
     val payload: Array<KClass<Payload>> = [],
 )
 
 class CategoryValidator : ConstraintValidator<ValidCategory, Set<String>> {
 
-    private val validCategories = setOf("MEAL", "FOOD", "CASH")
+    companion object {
+        private const val MEAL = "MEAL"
+        private const val FOOD = "FOOD"
+    }
+
+    private val validCategories = setOf("MEAL", "FOOD")
 
     override fun isValid(categories: Set<String>?, context: ConstraintValidatorContext?): Boolean {
 

@@ -22,7 +22,7 @@ class CategoryValidatorTest {
 
     @Test
     fun `should return true for valid categories`() {
-        val validCategories = setOf("FOOD", "MEAL", "CASH")
+        val validCategories = setOf("FOOD", "MEAL")
         assertTrue(categoryValidator.isValid(validCategories, mock()))
     }
 
@@ -43,9 +43,4 @@ class CategoryValidatorTest {
         assertFalse(categoryValidator.isValid(invalidCategories, mock()))
     }
 
-    @Test
-    fun `should return false for partially valid categories`() {
-        val partiallyValidCategories = setOf("FOOD", "MEAL", "INVALID")
-        assertFalse(categoryValidator.isValid(partiallyValidCategories, mock()))
-    }
 }

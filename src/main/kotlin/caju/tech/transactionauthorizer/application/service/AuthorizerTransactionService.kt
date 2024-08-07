@@ -26,7 +26,7 @@ class AuthorizerTransactionService(
         private const val ERROR = "07"
     }
 
-    override fun execute(transaction: Transaction): String =
+    override fun execute(transaction: Transaction): String {
         withLock("${transaction.accountId}-${AuthorizerTransactionService::class.java.name}", lockPort) {
             try {
                 logger.info("Starting service to authorize a new transaction: [{}]", transaction)
@@ -46,10 +46,11 @@ class AuthorizerTransactionService(
                 val categoriesMerchant = merchantRepositoryPort.findByName(transaction.merchant).categories
 
                 if (!categoriesMerchant.isNullOrEmpty()) {
-                    categoriesMerchant.forEach { categoryMerchant ->
-                        if (account.hasBalance(categoryMerchant, transaction))
-                            return debitAccountAndSaveTransaction(account, categoryMerchant, transaction)
-                    }
+                    categoriesMerchant.filter { it != categoryAccount }
+                        .forEach { categoryMerchant ->
+                            if (account.hasBalance(categoryMerchant, transaction))
+                                return debitAccountAndSaveTransaction(account, categoryMerchant, transaction)
+                        }
                 }
                 if (account.hasBalanceCash(transaction)) {
                     return debitAccountAndSaveTransaction(account, "CASH", transaction)
@@ -61,9 +62,10 @@ class AuthorizerTransactionService(
                 return REJECTED
             } catch (ex: Exception) {
                 logger.error("ERROR process transaction: [{}], message: [{}]", transaction, ex.message)
-                ERROR
+                return ERROR
             }
         }
+    }
 
     private fun debitAccountAndSaveTransaction(
         account: Account,
