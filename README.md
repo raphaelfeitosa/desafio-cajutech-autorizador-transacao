@@ -23,6 +23,7 @@ Redis é uma escolha popular para implementar lock de transação devido às sua
 - [Executando todos os testes](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#executando-todos-os-testes)
 - [Executando o projeto com Docker](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#executando-o-projeto-com-docker)
 - [Executando o projeto localmente](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#executando-o-projeto-localmente)
+- [Arquitetura](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#arquitetura)
 - [Tecnologias](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#tecnologias)
 - [Recursos](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#recursos-da-api-v1)
 - [Swagger](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#swagger)
@@ -77,7 +78,7 @@ no Windows
 ```shell
 mvnw.cmd spring-boot:run
 ```
-## Arquitetura do Pojeto
+## Arquitetura
 
 Foi utilizado a arquitetura hexagonal, também conhecida como arquitetura de portas e adaptadores (Ports and Adapters Architecture). . Seu principal objetivo é criar sistemas que sejam fáceis de manter, testar, e que permitam a integração com diferentes tipos de interfaces de entrada (usuários, APIs, filas de mensagens) e de saída (bancos de dados, serviços externos) sem impactar a lógica central do sistema.
 
