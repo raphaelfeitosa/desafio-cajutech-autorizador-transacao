@@ -109,7 +109,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 - ### Responses
   | Código | Descrição |
-      |---|---|
+  |---|---|
   | `200` | Requisição executada com sucesso (Success).|
   | `201` | Requisição cadastrada com sucesso (Success).|
   | `400` | Erros de validação ou cadastro existente (Bad Request).|
@@ -211,7 +211,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 - Response 200 (application/json)
     ```json
    {
-	    "message": "Balance update with success!"
+	"message": "Balance update with success!"
    }
     ```
   ### MERCHANT
@@ -224,25 +224,25 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
       "merchant": "merchant",
       "amount": 700.00,
       "mcc": "5412"
-    }
+   }
     ```
 
 - Response 200 (Ok) - Transação APROVADA
   ```json
    {
-	      "code": "00"
+	"code": "00"
    }
     ```
 - Response 200 (Ok) - Transação REJEITADA
     ```json
    {
-      "code": "51"
+    	"code": "51"
    }
     ```
 - Response 200 (Ok) - Problema na Transação
   ```json
   {
-    "code": "07"
+  	"code": "07"
   }
     ```
 
@@ -265,10 +265,8 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 
 `http://localhost:8080/api/swagger-ui/index.html`
 
-### Materia
-
 <p align="center" style="display: flex; align-items: flex-start; justify-content: center;">
-  <img alt="Vendas" title="#Home" src="https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao/blob/main/assets/swagger-transaction-authorizer.png?raw=true"/>
+  <img alt="Vendas" title="#Home" src="https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao/blob/main/assets/swagger-trasaction-authorizer.png?raw=true"/>
 </p>
 
 ## Autor
