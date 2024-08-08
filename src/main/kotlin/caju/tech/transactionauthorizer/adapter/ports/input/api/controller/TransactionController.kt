@@ -8,6 +8,7 @@ import caju.tech.transactionauthorizer.application.ports.input.AuthorizerTransac
 import caju.tech.transactionauthorizer.adapter.ports.input.api.TransactionApi
 import jakarta.validation.Valid
 import org.slf4j.LoggerFactory
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
@@ -26,7 +27,7 @@ class TransactionController(
         val authorizerTransactionResponse =
             authorizerTransactionUseCasePort.execute(authorizerTransactionRequest.toDomain())
         logger.info("Done process transaction!")
-        return ResponseEntity.ok().body(authorizerTransactionResponse.toResponse())
+        return ResponseEntity.status(HttpStatus.OK).body(authorizerTransactionResponse.toResponse())
     }
 
 }

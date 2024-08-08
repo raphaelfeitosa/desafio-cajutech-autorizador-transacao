@@ -11,6 +11,7 @@ import caju.tech.transactionauthorizer.application.ports.input.FindAccountByDocu
 import caju.tech.transactionauthorizer.application.ports.input.UpdateBalanceAccountUseCasePort
 import caju.tech.transactionauthorizer.adapter.ports.input.api.AccountApi
 import org.slf4j.LoggerFactory
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
 
@@ -29,7 +30,7 @@ class AccountController(
         logger.info("Request received to create a new account: [{}].", createAccountRequest)
         val createAccountResponse = createAccountUseCasePort.execute(createAccountRequest.toDomain())
         logger.info("Account created with success!")
-        return ResponseEntity.ok().body(createAccountResponse.toResponse())
+        return ResponseEntity.status(HttpStatus.CREATED).body(createAccountResponse.toResponse())
     }
 
     override fun updateBalance(
@@ -39,14 +40,14 @@ class AccountController(
         logger.info("Request received to update balance for accountId: [{}].", accountId)
         updateBalanceAccountUseCasePort.execute(updateBalanceAccountRequest.toDomain(accountId))
         logger.info("Balance updated for accountId: [{}] with success!", accountId)
-        return ResponseEntity.ok().body(UpdateBalanceAccountResponse("Balance update with success!"))
+        return ResponseEntity.status(HttpStatus.OK).body(UpdateBalanceAccountResponse("Balance update with success!"))
     }
 
     override fun findAccountIdByDocumentNumber(documentNumber: String): ResponseEntity<AccountIdResponse> {
         logger.info("Request received to find accountId with documentNumber: [{}].", documentNumber)
         val accountResponse = findAccountByDocumentNumberUseCasePort.execute(documentNumber)
         logger.info("AccountId found: [{}].", accountResponse.accountId)
-        return ResponseEntity.ok().body(accountResponse.toResponse())
+        return ResponseEntity.status(HttpStatus.OK).body(accountResponse.toResponse())
     }
 
 }

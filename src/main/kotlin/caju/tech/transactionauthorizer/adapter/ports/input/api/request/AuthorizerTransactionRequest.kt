@@ -4,20 +4,26 @@ import jakarta.validation.constraints.DecimalMin
 import jakarta.validation.constraints.Digits
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Pattern
-import org.hibernate.validator.constraints.UUID
 
 data class AuthorizerTransactionRequest(
-    @field:UUID(message = "accountId must be an UUID")
+    @field:Pattern(
+        regexp = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[4][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$",
+        message = "accountId must be an UUID"
+    )
     val accountId: String,
 
     @field:DecimalMin(value = "0.01", message = "must be greater than or equal to 0.01")
-    @field:Digits(integer = 6, fraction = 2, message = "numeric value outside the limit. integer: 6 digits. fraction: 2 digits")
+    @field:Digits(
+        integer = 6,
+        fraction = 2,
+        message = "numeric value outside the limit. integer: 6 digits. fraction: 2 digits"
+    )
     val amount: Double,
 
-    @NotBlank(message = "merchant cannot be blank")
-    @Pattern(regexp = "^\\d{4}$", message = "mcc must contain 4 numbers")
+    @field:NotBlank(message = "merchant cannot be blank")
     val merchant: String,
 
     @field:NotBlank(message = "mcc cannot be blank")
+    @field:Pattern(regexp = "^\\d{4}$", message = "mcc must contain 4 numbers")
     val mcc: String,
 )

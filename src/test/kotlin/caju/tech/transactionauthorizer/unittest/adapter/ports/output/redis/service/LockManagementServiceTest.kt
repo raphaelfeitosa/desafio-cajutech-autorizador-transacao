@@ -1,6 +1,7 @@
-package caju.tech.transactionauthorizer.adapter.ports.output.redis.service
+package caju.tech.transactionauthorizer.unittest.adapter.ports.output.redis.service
 
 import caju.tech.transactionauthorizer.adapter.ports.output.redis.repository.LockRepository
+import caju.tech.transactionauthorizer.adapter.ports.output.redis.service.LockManagementService
 import caju.tech.transactionauthorizer.domain.exceptions.BusinessException
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
