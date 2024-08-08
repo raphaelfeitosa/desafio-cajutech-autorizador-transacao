@@ -26,6 +26,7 @@ Redis é uma escolha popular para implementar lock de transação devido às sua
 - [Arquitetura](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#arquitetura)
 - [Tecnologias](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#tecnologias)
 - [Recursos](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#recursos-da-api-v1)
+- [Instruçoes para testar API](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#instruções-para-testar-api)
 - [Swagger](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#swagger)
 - [Autor](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#autor)
 
@@ -43,9 +44,9 @@ no Windows
 mvnw.cmd test
 ```
 
-## Executando o projeto com Docker
+## Executando Infra com o Docker
 
-É necessario ter o docker instalado! No terminal, navegue até a pasta raiz do projeto e execute
+É necessario ter o docker instalado! No terminal, navegue até a pasta raiz do projeto e execute o comando abaixo para subir a infra estrutura
 
 ```shell
 docker-compose up --build
@@ -264,6 +265,14 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
        }
   }
   ```
+
+## Instruções para testar API
+
+- **1. Cadastrar account, endpoint: /api/v1/accounts**
+- **2. Adicionar saldo na conta, endpoint: /api/v1/{accountId}/balance**
+- **3. Cadastrar merchant, endpoint: /api/v1/merchants**
+- **4. realizar transação, endpoint: /api/v1/transactions**
+
 ## Swagger
 
 `http://localhost:8080/api/swagger-ui/index.html`
