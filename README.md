@@ -26,7 +26,7 @@ Redis é uma escolha popular para implementar lock de transação devido às sua
 - [Tecnologias](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#tecnologias)
 - [Recursos](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#recursos-da-api-v1)
 - [Swagger](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#swagger)
-- [Autor](https://github.com/raphaelfeitosa/microservice-grade-curricular#autor)
+- [Autor](https://github.com/raphaelfeitosa/desafio-cajutech-autorizador-transacao#autor)
 
 
 ## Executando todos os testes
