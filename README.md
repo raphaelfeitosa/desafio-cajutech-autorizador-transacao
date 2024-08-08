@@ -77,11 +77,13 @@ no Windows
 ```shell
 mvnw.cmd spring-boot:run
 ```
+## Arquitetura do Pojeto
+
+Foi utilizado a arquitetura hexagonal, também conhecida como arquitetura de portas e adaptadores (Ports and Adapters Architecture). . Seu principal objetivo é criar sistemas que sejam fáceis de manter, testar, e que permitam a integração com diferentes tipos de interfaces de entrada (usuários, APIs, filas de mensagens) e de saída (bancos de dados, serviços externos) sem impactar a lógica central do sistema.
 
 ## Tecnologias
 
 As seguintes tecnologias foram usadas na construção do projeto:
-
 
 - **Spring Boot**
 - **Kotlin**
