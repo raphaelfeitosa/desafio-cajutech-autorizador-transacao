@@ -26,7 +26,7 @@ springdoc:
   api-docs:
     path: /v3/api-docs
   swagger-ui:
-    path: /swagger-ui.html
+    path: /api/swagger-ui.html
   info:
     title: Transaction Authorizer API
     description: API for authorizing transactions
