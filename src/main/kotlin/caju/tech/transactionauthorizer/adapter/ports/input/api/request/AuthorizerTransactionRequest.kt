@@ -21,9 +21,9 @@ data class AuthorizerTransactionRequest(
     val amount: Double,
 
     @field:NotBlank(message = "merchant cannot be blank")
-    @Pattern(regexp = "^\\d{4}$", message = "mcc must contain 4 numbers")
     val merchant: String,
 
     @field:NotBlank(message = "mcc cannot be blank")
+    @field:Pattern(regexp = "^\\d{4}$", message = "mcc must contain 4 numbers")
     val mcc: String,
 )
