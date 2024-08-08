@@ -20,9 +20,9 @@ class MerchantController(
     }
 
     override fun create(createMerchantRequest: CreateMerchantRequest): ResponseEntity<MerchantIdResponse> {
-        logger.info("Request received to create a new merchant: [{}].", createMerchantRequest)
+        logger.info("Request received to create or update merchant: [{}].", createMerchantRequest)
         val createMerchantResponse = createMerchantUseCasePort.execute(createMerchantRequest.toDomain())
-        logger.info("Merchant created with success!")
+        logger.info("Merchant created or updated with success!")
         return ResponseEntity.ok().body(createMerchantResponse.toResponse())
     }
 

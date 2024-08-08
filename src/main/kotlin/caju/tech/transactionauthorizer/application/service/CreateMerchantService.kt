@@ -16,9 +16,9 @@ class CreateMerchantService(
     }
 
     override fun execute(merchant: Merchant): Merchant {
-        logger.info("Starting service to create a new merchant.")
+        logger.info("Starting service to create or update merchant.")
         merchantRepositoryPort.save(merchant)
-        logger.info("Done service to create a new merchant.")
+        logger.info("Done service to create or update merchant.")
         return merchant
     }
 
