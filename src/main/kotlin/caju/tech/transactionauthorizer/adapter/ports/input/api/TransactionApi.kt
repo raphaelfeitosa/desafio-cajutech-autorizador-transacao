@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.ResponseStatus
 
-@RequestMapping("/v1/transactions")
+@RequestMapping("/api/v1/transactions")
 interface TransactionApi {
 
     @ResponseStatus(OK)

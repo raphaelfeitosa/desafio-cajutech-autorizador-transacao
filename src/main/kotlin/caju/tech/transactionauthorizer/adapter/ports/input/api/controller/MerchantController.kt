@@ -7,6 +7,7 @@ import caju.tech.transactionauthorizer.adapter.ports.input.api.request.CreateMer
 import caju.tech.transactionauthorizer.adapter.ports.input.api.response.MerchantIdResponse
 import caju.tech.transactionauthorizer.application.ports.input.CreateMerchantUseCasePort
 import org.slf4j.LoggerFactory
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.RestController
 
@@ -23,7 +24,7 @@ class MerchantController(
         logger.info("Request received to create or update merchant: [{}].", createMerchantRequest)
         val createMerchantResponse = createMerchantUseCasePort.execute(createMerchantRequest.toDomain())
         logger.info("Merchant created or updated with success!")
-        return ResponseEntity.ok().body(createMerchantResponse.toResponse())
+        return ResponseEntity.status(HttpStatus.CREATED).body(createMerchantResponse.toResponse())
     }
 
 }
