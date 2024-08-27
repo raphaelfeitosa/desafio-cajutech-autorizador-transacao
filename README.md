@@ -103,14 +103,19 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
   ```
   POST: /merchants: para cadastrar ou atualizar um merchant
   ```
-
+  
 - ### Rescurso [/accounts], Methods: GET, POST, PATCH
   ```
-  GET: /accounts/{documentNumber}: para listar o account id
+  GET: /accounts/{documentNumber}: para recuperar o account id
   POST: /accounts: para cadastrar um account
   PATCH: /accounts/{accountId}/balance: para adicionar saldo na conta
   ```
 
+- ### Rescurso [/transactions], Methods: POST
+  ```
+  POST: /transactions: para autorizar uma transação no cartão de credito
+  ```
+  
 - ### Responses
   | Código | Descrição |
   |---|---|

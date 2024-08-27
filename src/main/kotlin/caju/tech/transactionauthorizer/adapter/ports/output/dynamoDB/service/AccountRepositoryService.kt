@@ -31,7 +31,7 @@ class AccountRepositoryService(
     override fun findByAccountId(accountId: String): Account {
         logger.info("Starting process to find account with accountId: [{}], in DB.", accountId)
         val accountEntity = accountRepository.findByAccountId(accountId)
-            .orElseThrow { NotFoundException(Errors.RESOURCE_NOT_FOUND) }
+            .orElseThrow { NotFoundException(Errors.ACCOUNT_NOT_FOUND) }
         logger.info("Done process to find a account: [{}], in DB", accountEntity)
         return accountEntity.toDomain()
     }
@@ -39,7 +39,7 @@ class AccountRepositoryService(
     override fun findByDocumentNumber(documentNumber: String): Account {
         logger.info("Starting process to find accountId with documentNumber: [{}], in DB.", documentNumber)
         val accountEntity = accountRepository.findByDocumentNumber(documentNumber)
-            .orElseThrow { NotFoundException(Errors.RESOURCE_NOT_FOUND) }
+            .orElseThrow { NotFoundException(Errors.ACCOUNT_NOT_FOUND) }
         logger.info(
             "Done process to find accountId: [{}], with documentNumber: [{}], in DB.",
             accountEntity.accountId,

@@ -40,7 +40,7 @@ class MerchantRepositoryService(
     override fun findByName(name: String): Merchant {
         logger.info("Starting process to find merchant with name: [{}], in DB.", name)
         val merchantEntity = merchantRepository.findByName(name)
-            .orElseThrow { NotFoundException(Errors.RESOURCE_NOT_FOUND) }
+            .orElseThrow { NotFoundException(Errors.MERCHANT_NOT_FOUND) }
         logger.info("Done process to find a merchant: [{}], in DB", merchantEntity)
         return merchantEntity.toDomain()
     }
