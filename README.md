@@ -220,10 +220,11 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 - Response 200 (application/json)
     ```json
    {
-	"message": "Balance update with success!"
+       "message": "Balance update with success!"
    }
     ```
-  ### MERCHANT
+    
+### TRANSACTION
 **POST:** `/transactions` com *body*:
 
 - Request (application/json)
@@ -239,21 +240,21 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 - Response 200 (Ok) - Transação APROVADA
   ```json
    {
-	"code": "00"
+      "code": "00"
    }
-    ```
+  ```
 - Response 200 (Ok) - Transação REJEITADA
-    ```json
+  ```json
    {
-    	"code": "51"
+      "code": "51"
    }
-    ```
+  ```
 - Response 200 (Ok) - Problema na Transação
   ```json
   {
-  	"code": "07"
+     "code": "07"
   }
-    ```
+  ```
 
 - Response 400 (Bad Request) - Erros na validação
      ```json
@@ -274,7 +275,7 @@ Recursos disponíveis para acesso via api: `http://localhost:8081/api/v1`
 ## Instruções para testar API
 
 - **1. Cadastrar account, endpoint: /api/v1/accounts**
-- **2. Adicionar saldo na conta, endpoint: /api/v1/{accountId}/balance**
+- **2. Adicionar saldo na conta, endpoint: /api/v1/accounts/{accountId}/balance**
 - **3. Cadastrar merchant, endpoint: /api/v1/merchants**
 - **4. realizar transação, endpoint: /api/v1/transactions**
 
